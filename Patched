@@ -1,0 +1,52 @@
+def prime_factor_list(x):  #Finds factors of x
+	import math
+	y=[]
+	for i in range(1,math.floor(math.sqrt(x)+1)):
+		if x%i == 0:
+			y.append(i)
+		else:
+			continue
+	return y
+  
+def prime(x):      #Checks if prime by iff factor less than sqrt(x) is 1
+	if prime_factor_list(x) == [1]:
+		return True
+	else:
+		return False
+
+def lowest_common_multiple_uptoinc(x):        #Multiplying highest power prime factors
+	import math
+	a=[]
+	b=[]
+	c=[]
+	p=1
+	d=0
+	e=1
+	for i in range(1,x+1):
+		if prime(i)==True:
+			a.append(i)
+		else:
+			b.append(i)
+	for i in range(0,len(a)):
+		c.append(1)
+	for i in b:
+		for j in range(1,len(a)):
+			if i%a[j]!=0 and a[j]< math.floor(math.sqrt(x))+1:
+				continue
+			elif a[j]< math.floor(math.sqrt(x))+1:
+				d=0
+				e=a[j]
+				while i%e==0:
+					d=d+1
+					i=i/e
+				if d==0:
+					continue
+				else:
+					k=sorted([c[j],d])
+					c[j]=k[1]
+					continue
+			else:
+				continue
+	for i in range(0,len(a)):
+		p = p * ( a[i] ** c[i])
+	return a,b,c,d,e,p
